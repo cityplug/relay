@@ -1,0 +1,69 @@
+version: "3"
+
+networks:
+  relay_net:
+    external: true
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    environment:
+      TZ: Europe/London
+      WEBPASSWORD:
+      ServerIP: 192.168.50.253
+    hostname: relay.pihole
+    volumes:
+      - /relay/.AppData/pihole:/etc/pihole/
+      - /relay/.AppData/pihole/dnsmasq:/etc/dnsmasq.d/
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    networks:
+      relay_net:
+        ipv4_address: 192.168.50.253
+
+  unifi:
+    container_name: unifi
+    image: lscr.io/linuxserver/unifi-controller:latest
+    environment:
+      PUID: 0
+      PGID: 0
+      MEM_LIMIT: 1024
+      MEM_STARTUP: 1024
+    hostname: unifi
+    volumes:
+      - /relay/.AppData/unifi/config:/config
+    ports:
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 8080:8080
+      - 8443:8443
+      - 1900:1900/udp
+      - 6789:6789
+      - 5514:5514/udp
+    restart: unless-stopped
+
+  cloudflare-ddns:
+    container_name: home-cloudflareDNS
+    image: oznu/cloudflare-ddns
+    restart: always
+    environment:
+      PUID: 0
+      PGID: 0
+      API_KEY: ktez6xlMnDf0yaD5xGuUjgI-PV95A2Dn3tohz6wV
+      ZONE: cityplug.co.uk
+      SUBDOMAIN: home.cityplug.co.uk
+
+  portainer:
+    container_name: portainer_agent
+    image: portainer/agent:2.11.1
+    restart: always
+    ports:
+      - "9001:9001"
+    environment:
+      - TZ=Europe/London
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+      - /relay/.AppData/portainer:/data

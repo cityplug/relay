@@ -1,0 +1,656 @@
+# JAILS
+
+# SSH servers
+
+[sshd]
+enabled = true
+port = 4792
+filter = sshd
+maxretry = 3
+bantime = 1800
+banaction = iptables-multiport
+logpath = %(sshd_log)s
+backend = %(sshd_backend)s
+
+[dropbear]
+
+port     = ssh
+logpath  = %(dropbear_log)s
+backend  = %(dropbear_backend)s
+
+
+[selinux-ssh]
+
+port     = ssh
+logpath  = %(auditd_log)s
+
+
+#
+# HTTP servers
+#
+
+[apache-auth]
+
+port     = http,https
+logpath  = %(apache_error_log)s
+
+[apache-badbots]
+port     = http,https
+logpath  = %(apache_access_log)s
+bantime  = 48h
+maxretry = 1
+
+[apache-noscript]
+
+port     = http,https
+logpath  = %(apache_error_log)s
+
+
+[apache-overflows]
+
+port     = http,https
+logpath  = %(apache_error_log)s
+maxretry = 2
+
+
+[apache-nohome]
+
+port     = http,https
+logpath  = %(apache_error_log)s
+maxretry = 2
+
+
+[apache-botsearch]
+
+port     = http,https
+logpath  = %(apache_error_log)s
+maxretry = 2
+
+
+[apache-fakegooglebot]
+
+port     = http,https
+logpath  = %(apache_access_log)s
+maxretry = 1
+ignorecommand = %(ignorecommands_dir)s/apache-fakegooglebot <ip>
+
+
+[apache-modsecurity]
+
+port     = http,https
+logpath  = %(apache_error_log)s
+maxretry = 2
+
+
+[apache-shellshock]
+
+port    = http,https
+logpath = %(apache_error_log)s
+maxretry = 1
+
+
+[openhab-auth]
+
+filter = openhab
+banaction = %(banaction_allports)s
+logpath = /opt/openhab/logs/request.log
+
+
+[nginx-http-auth]
+
+enabled  = true
+filter   = nginx-http-auth
+port     = http,https
+logpath  = /var/log/nginx/error.log
+
+[nginx-noscript]
+
+enabled  = true
+port     = http,https
+filter   = nginx-noscript
+logpath  = /var/log/nginx/access.log
+maxretry = 6
+
+[nginx-badbots]
+
+enabled  = true
+port     = http,https
+filter   = nginx-badbots
+logpath  = /var/log/nginx/access.log
+maxretry = 2
+
+[nginx-limit-req]
+port    = http,https
+logpath = %(nginx_error_log)s
+
+[nginx-botsearch]
+
+port     = http,https
+logpath  = %(nginx_error_log)s
+maxretry = 2
+
+[nginx-noproxy]
+
+enabled  = true
+port     = http,https
+filter   = nginx-noproxy
+logpath  = /var/log/nginx/access.log
+maxretry = 2
+
+
+[php-url-fopen]
+
+port    = http,https
+logpath = %(nginx_access_log)s
+          %(apache_access_log)s
+
+
+[suhosin]
+
+port    = http,https
+logpath = %(suhosin_log)s
+
+
+[lighttpd-auth]
+port    = http,https
+logpath = %(lighttpd_error_log)s
+
+[roundcube-auth]
+
+port     = http,https
+logpath  = %(roundcube_errors_log)s
+# Use following line in your jail.local if roundcube logs to journal.
+#backend = %(syslog_backend)s
+
+
+[openwebmail]
+
+port     = http,https
+logpath  = /var/log/openwebmail.log
+
+
+[horde]
+
+port     = http,https
+logpath  = /var/log/horde/horde.log
+
+
+[groupoffice]
+
+port     = http,https
+logpath  = /home/groupoffice/log/info.log
+
+
+[sogo-auth]
+# port    = 20000
+port     = http,https
+logpath  = /var/log/sogo/sogo.log
+
+
+[tine20]
+
+logpath  = /var/log/tine20/tine20.log
+port     = http,https
+
+
+[drupal-auth]
+
+port     = http,https
+logpath  = %(syslog_daemon)s
+backend  = %(syslog_backend)s
+
+[guacamole]
+
+port     = http,https
+logpath  = /var/log/tomcat*/catalina.out
+#logpath  = /var/log/guacamole.log
+
+[monit]
+#Ban clients brute-forcing the monit gui login
+port = 2812
+logpath  = /var/log/monit
+           /var/log/monit.log
+
+
+[webmin-auth]
+
+port    = 10000
+logpath = %(syslog_authpriv)s
+backend = %(syslog_backend)s
+
+
+[froxlor-auth]
+
+port    = http,https
+logpath  = %(syslog_authpriv)s
+backend  = %(syslog_backend)s
+
+
+#
+# HTTP Proxy servers
+#
+#
+
+[squid]
+
+port     =  80,443,3128,8080
+logpath = /var/log/squid/access.log
+
+
+[3proxy]
+
+port    = 3128
+logpath = /var/log/3proxy.log
+
+
+#
+# FTP servers
+#
+
+
+[proftpd]
+
+port     = ftp,ftp-data,ftps,ftps-data
+logpath  = %(proftpd_log)s
+backend  = %(proftpd_backend)s
+
+
+[pure-ftpd]
+
+port     = ftp,ftp-data,ftps,ftps-data
+logpath  = %(pureftpd_log)s
+backend  = %(pureftpd_backend)s
+
+
+[gssftpd]
+
+port     = ftp,ftp-data,ftps,ftps-data
+logpath  = %(syslog_daemon)s
+backend  = %(syslog_backend)s
+
+
+[wuftpd]
+
+port     = ftp,ftp-data,ftps,ftps-data
+logpath  = %(wuftpd_log)s
+backend  = %(wuftpd_backend)s
+
+
+[vsftpd]
+# or overwrite it in jails.local to be
+# logpath = %(syslog_authpriv)s
+# if you want to rely on PAM failed login attempts
+# vsftpd's failregex should match both of those formats
+port     = ftp,ftp-data,ftps,ftps-data
+logpath  = %(vsftpd_log)s
+
+
+#
+# Mail servers
+#
+
+# ASSP SMTP Proxy Jail
+[assp]
+
+port     = smtp,465,submission
+logpath  = /root/path/to/assp/logs/maillog.txt
+
+
+[courier-smtp]
+
+port     = smtp,465,submission
+logpath  = %(syslog_mail)s
+backend  = %(syslog_backend)s
+
+
+[postfix]
+# To use another modes set filter parameter "mode" in jail.local:
+mode    = more
+port    = smtp,465,submission
+logpath = %(postfix_log)s
+backend = %(postfix_backend)s
+
+
+[postfix-rbl]
+
+filter   = postfix[mode=rbl]
+port     = smtp,465,submission
+logpath  = %(postfix_log)s
+backend  = %(postfix_backend)s
+maxretry = 1
+
+
+[sendmail-auth]
+
+port    = submission,465,smtp
+logpath = %(syslog_mail)s
+backend = %(syslog_backend)s
+
+
+[sendmail-reject]
+# To use more aggressive modes set filter parameter "mode" in jail.local:
+# normal (default), extra or aggressive
+# See "tests/files/logs/sendmail-reject" or "filter.d/sendmail-reject.conf" for usage example and details.
+#mode    = normal
+port     = smtp,465,submission
+logpath  = %(syslog_mail)s
+backend  = %(syslog_backend)s
+
+
+[qmail-rbl]
+
+filter  = qmail
+port    = smtp,465,submission
+logpath = /service/qmail/log/main/current
+
+
+# dovecot defaults to logging to the mail syslog facility
+# but can be set by syslog_facility in the dovecot configuration.
+[dovecot]
+
+port    = pop3,pop3s,imap,imaps,submission,465,sieve
+logpath = %(dovecot_log)s
+backend = %(dovecot_backend)s
+
+
+[sieve]
+
+port   = smtp,465,submission
+logpath = %(dovecot_log)s
+backend = %(dovecot_backend)s
+
+
+[solid-pop3d]
+
+port    = pop3,pop3s
+logpath = %(solidpop3d_log)s
+
+
+[exim]
+# see filter.d/exim.conf for further modes supported from filter:
+#mode = normal
+port   = smtp,465,submission
+logpath = %(exim_main_log)s
+
+
+[exim-spam]
+
+port   = smtp,465,submission
+logpath = %(exim_main_log)s
+
+
+[kerio]
+
+port    = imap,smtp,imaps,465
+logpath = /opt/kerio/mailserver/store/logs/security.log
+
+
+#
+# Mail servers authenticators: might be used for smtp,ftp,imap servers, so
+# all relevant ports get banned
+#
+
+[courier-auth]
+
+port     = smtp,465,submission,imap,imaps,pop3,pop3s
+logpath  = %(syslog_mail)s
+backend  = %(syslog_backend)s
+
+
+[postfix-sasl]
+
+filter   = postfix[mode=auth]
+port     = smtp,465,submission,imap,imaps,pop3,pop3s
+# You might consider monitoring /var/log/mail.warn instead if you are
+# running postfix since it would provide the same log lines at the
+# "warn" level but overall at the smaller filesize.
+logpath  = %(postfix_log)s
+backend  = %(postfix_backend)s
+
+
+[perdition]
+
+port   = imap,imaps,pop3,pop3s
+logpath = %(syslog_mail)s
+backend = %(syslog_backend)s
+
+
+[squirrelmail]
+
+port = smtp,465,submission,imap,imap2,imaps,pop3,pop3s,http,https,socks
+logpath = /var/lib/squirrelmail/prefs/squirrelmail_access_log
+
+
+[cyrus-imap]
+
+port   = imap,imaps
+logpath = %(syslog_mail)s
+backend = %(syslog_backend)s
+
+
+[uwimap-auth]
+
+port   = imap,imaps
+logpath = %(syslog_mail)s
+backend = %(syslog_backend)s
+
+
+#
+#
+# DNS servers
+#
+
+# IMPORTANT: see filter.d/named-refused for instructions to enable logging
+# This jail blocks TCP traffic for DNS requests.
+
+[named-refused]
+
+port     = domain,953
+logpath  = /var/log/named/security.log
+
+
+[nsd]
+
+port     = 53
+action_  = %(default/action_)s[name=%(__name__)s-tcp, protocol="tcp"]
+           %(default/action_)s[name=%(__name__)s-udp, protocol="udp"]
+logpath = /var/log/nsd.log
+
+
+#
+# Miscellaneous
+#
+
+[asterisk]
+
+port     = 5060,5061
+action_  = %(default/action_)s[name=%(__name__)s-tcp, protocol="tcp"]
+           %(default/action_)s[name=%(__name__)s-udp, protocol="udp"]
+logpath  = /var/log/asterisk/messages
+maxretry = 10
+
+
+[freeswitch]
+
+port     = 5060,5061
+action_  = %(default/action_)s[name=%(__name__)s-tcp, protocol="tcp"]
+           %(default/action_)s[name=%(__name__)s-udp, protocol="udp"]
+logpath  = /var/log/freeswitch.log
+maxretry = 10
+
+
+# enable adminlog; it will log to a file inside znc's directory by default.
+[znc-adminlog]
+
+port     = 6667
+logpath  = /var/lib/znc/moddata/adminlog/znc.log
+
+
+# To log wrong MySQL access attempts add to /etc/my.cnf in [mysqld] or
+# equivalent section:
+# log-warnings = 2
+#
+# for syslog (daemon facility)
+# [mysqld_safe]
+# syslog
+#
+# for own logfile
+# [mysqld]
+# log-error=/var/log/mysqld.log
+[mysqld-auth]
+
+port     = 3306
+logpath  = %(mysql_log)s
+backend  = %(mysql_backend)s
+
+[recidive]
+
+logpath  = /var/log/fail2ban.log
+banaction = %(banaction_allports)s
+bantime  = 1w
+findtime = 1d
+
+
+# Generic filter for PAM. Has to be used with action which bans all
+# ports such as iptables-allports, shorewall
+
+[pam-generic]
+# pam-generic filter can be customized to monitor specific subset of 'tty's
+banaction = %(banaction_allports)s
+logpath  = %(syslog_authpriv)s
+backend  = %(syslog_backend)s
+
+
+[xinetd-fail]
+
+banaction = iptables-multiport-log
+logpath   = %(syslog_daemon)s
+backend   = %(syslog_backend)s
+maxretry  = 2
+
+
+# stunnel - need to set port for this
+[stunnel]
+
+logpath = /var/log/stunnel4/stunnel.log
+
+
+[ejabberd-auth]
+
+port    = 5222
+logpath = /var/log/ejabberd/ejabberd.log
+
+
+[counter-strike]
+
+logpath = /opt/cstrike/logs/L[0-9]*.log
+tcpport = 27030,27031,27032,27033,27034,27035,27036,27037,27038,27039
+udpport = 1200,27000,27001,27002,27003,27004,27005,27006,27007,27008,27009,27010,27011,27012,27013,27014,27015
+action_  = %(default/action_)s[name=%(__name__)s-tcp, port="%(tcpport)s", protocol="tcp"]
+           %(default/action_)s[name=%(__name__)s-udp, port="%(udpport)s", protocol="udp"]
+
+[softethervpn]
+port     = 500,4500
+protocol = udp
+logpath  = /usr/local/vpnserver/security_log/*/sec.log
+
+[gitlab]
+port    = http,https
+logpath = /var/log/gitlab/gitlab-rails/application.log
+
+[grafana]
+port    = http,https
+logpath = /var/log/grafana/grafana.log
+
+[bitwarden]
+port    = http,https
+logpath = /home/*/bwdata/logs/identity/Identity/log.txt
+
+[centreon]
+port    = http,https
+logpath = /var/log/centreon/login.log
+
+# consider low maxretry and a long bantime
+# nobody except your own Nagios server should ever probe nrpe
+[nagios]
+
+logpath  = %(syslog_daemon)s     ; nrpe.cfg may define a different log_facility
+backend  = %(syslog_backend)s
+maxretry = 1
+
+
+[oracleims]
+# see "oracleims" filter file for configuration requirement for Oracle IMS v6 and above
+logpath = /opt/sun/comms/messaging64/log/mail.log_current
+banaction = %(banaction_allports)s
+
+[directadmin]
+logpath = /var/log/directadmin/login.log
+port = 2222
+
+[portsentry]
+logpath  = /var/lib/portsentry/portsentry.history
+maxretry = 1
+
+[pass2allow-ftp]
+# this pass2allow example allows FTP traffic after successful HTTP authentication
+port         = ftp,ftp-data,ftps,ftps-data
+# knocking_url variable must be overridden to some secret value in jail.local
+knocking_url = /knocking/
+filter       = apache-pass[knocking_url="%(knocking_url)s"]
+# access log of the website with HTTP auth
+logpath      = %(apache_access_log)s
+blocktype    = RETURN
+returntype   = DROP
+action       = %(action_)s[blocktype=%(blocktype)s, returntype=%(returntype)s,
+                        actionstart_on_demand=false, actionrepair_on_unban=true]
+bantime      = 1h
+maxretry     = 1
+findtime     = 1
+
+
+[murmur]
+# AKA mumble-server
+port     = 64738
+action_  = %(default/action_)s[name=%(__name__)s-tcp, protocol="tcp"]
+           %(default/action_)s[name=%(__name__)s-udp, protocol="udp"]
+logpath  = /var/log/mumble-server/mumble-server.log
+
+
+[screensharingd]
+# For Mac OS Screen Sharing Service (VNC)
+logpath  = /var/log/system.log
+logencoding = utf-8
+
+[haproxy-http-auth]
+# HAProxy by default doesn't log to file you'll need to set it up to forward
+# logs to a syslog server which would then write them to disk.
+# See "haproxy-http-auth" filter for a brief cautionary note when setting
+# maxretry and findtime.
+logpath  = /var/log/haproxy.log
+
+[slapd]
+port    = ldap,ldaps
+logpath = /var/log/slapd.log
+
+[domino-smtp]
+port    = smtp,ssmtp
+logpath = /home/domino01/data/IBM_TECHNICAL_SUPPORT/console.log
+
+[phpmyadmin-syslog]
+port    = http,https
+logpath = %(syslog_authpriv)s
+backend = %(syslog_backend)s
+
+
+[zoneminder]
+# Zoneminder HTTP/HTTPS web interface auth
+# Logs auth failures to apache2 error log
+port    = http,https
+logpath = %(apache_error_log)s
+
+[traefik-auth]
+# to use 'traefik-auth' filter you have to configure your Traefik instance,
+# see `filter.d/traefik-auth.conf` for details and service example.
+port    = http,https
+logpath = /var/log/traefik/access.log

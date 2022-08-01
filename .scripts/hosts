@@ -1,0 +1,12 @@
+127.0.0.1       localhost
+127.0.1.1       home.cityplug.co.uk relay.home.lan
+
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+
+
+81.174.167.183  home.cityplug.co.uk
+192.168.50.11   pve.home.lan
+192.168.50.99   XPS13
+192.168.50.250  draco.home.lan
