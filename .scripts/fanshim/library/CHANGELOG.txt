@@ -1,0 +1,27 @@
+0.0.5
+-----
+
+* Replace Plasma API with APA102 library
+* Add support for setting LED global brightness
+* Add support for disabling button and/or LED
+* Move packages/requires to setup.config, minimum version now Python 2.7
+
+0.0.4
+-----
+
+* Prepare Fan SHIM to use legacy Plasma API
+
+0.0.3
+-----
+
+* Fix: lower polling frequency and make customisable, for PR #6
+
+0.0.2
+-----
+
+* Fix: Fix error on exit
+
+0.0.1
+-----
+
+* Initial Release

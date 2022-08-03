@@ -102,5 +102,7 @@ sh -c 'echo "apt autoremove -y" >> /etc/cron.monthly/autoremove'
 chmod +x /etc/cron.monthly/autoremove
 echo "#  ---  4GB swap file created | SYSTEM REBOOTING  ---  #"
 
+echo "#  ---  Running Fan Control  ---  #"
+cd fanshim && ./install.sh    
 reboot
 # ----> Next Script | security-samba.sh
