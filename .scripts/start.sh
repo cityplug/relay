@@ -22,7 +22,7 @@ systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
 # --- Over clcok raspberry pi & increase GPU
-sed -i '40i\over_voltage=6\narm_freq_min=1000\narm_freq=2000\n' /boot/config.txt
+sed -i '40i\over_voltage=2\narm_freq_min=800\narm_freq=1750\n' /boot/config.txt
 
 # --- Disable Bluetooth & Wifi
 echo "
@@ -43,6 +43,7 @@ mv /opt/relay/.scripts/hosts /etc/hosts
 
 # --- Install Packages
 echo "#  ---  Installing New Packages  ---  #"
+apt install rpi-update -y
 apt install unattended-upgrades -y
 apt install ca-certificates -y
 apt install lsb-release -y
@@ -52,6 +53,7 @@ apt install fail2ban -y
 apt install netdiscover -y
 apt install samba samba-common-bin -y
 apt install shellinabox -y
+apt install python3-pip -y
 # --- Install Docker & Docker-Compose
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -73,7 +75,7 @@ usermod -aG docker shay
 # --- Addons
 echo "#  ---  Running Addons  ---  #"
 mkdir -p /relay
-mkdir /relay/.AppData/ && && chmod -R 777 /relay/.AppData
+mkdir /relay/.AppData/ && chmod -R 777 /relay/.AppData
 mkdir /relay/storage/ && chmod -R 777 /relay/storage
 mkdir /relay/public && chmod -R 777 /relay/public
 chown -R shay:sambashare /relay/*
@@ -85,6 +87,9 @@ wget https://raw.githubusercontent.com/shellinabox/shellinabox/master/shellinabo
 mv /opt/relay/.scripts/shellinabox /etc/default/shellinabox
 echo "
 0 0 1 * * netdiscover >> /relay/storage/netdiscover-log.txt" >>/etc/crontab
+chmod +x /opt/relay/.script/fanshim/install-service.sh
+#./install-service.sh --on-threshold 65 --off-threshold 55 --delay 2 
+./install-service.sh --on-threshold 75 --off-threshold 60 --delay 5
 
 # --- Create and allocate swap
 echo "#  ---  Creating 4GB swap file  ---  #"
@@ -92,10 +97,8 @@ fallocate -l 4G /swapfile
 # --- Sets permissions on swap
 chmod 600 /swapfile
 mkswap /swapfile && swapon /swapfile
-# --- Add swap to the /fstab file
-sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab'
-# --- Verify command
-cat /etc/fstab
+# --- Add swap to the /fstab file & Verify command
+sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab' && cat /etc/fstab
 # --- Clear older versions
 sh -c 'echo "apt autoremove -y" >> /etc/cron.monthly/autoremove'
 # --- Make file executable
@@ -103,6 +106,6 @@ chmod +x /etc/cron.monthly/autoremove
 echo "#  ---  4GB swap file created | SYSTEM REBOOTING  ---  #"
 
 echo "#  ---  Running Fan Control  ---  #"
-cd fanshim && ./install.sh    
+cd fanshim && chmod +x install.sh && ./install.sh    
 reboot
 # ----> Next Script | security-samba.sh
