@@ -89,7 +89,7 @@ echo "
 0 0 1 * * netdiscover >> /relay/storage/netdiscover-log.txt" >>/etc/crontab
 chmod +x /opt/relay/.script/fanshim/install-service.sh
 #./install-service.sh --on-threshold 65 --off-threshold 55 --delay 2 
-./install-service.sh --on-threshold 75 --off-threshold 60 --delay 5
+./install-service.sh --on-threshold 70 --off-threshold 60 --delay 3
 
 # --- Create and allocate swap
 echo "#  ---  Creating 4GB swap file  ---  #"
