@@ -43,7 +43,6 @@ mv /opt/relay/.scripts/hosts /etc/hosts
 
 # --- Install Packages
 echo "#  ---  Installing New Packages  ---  #"
-apt install rpi-update -y
 apt install unattended-upgrades -y
 apt install ca-certificates -y
 apt install lsb-release -y
