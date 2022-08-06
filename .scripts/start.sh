@@ -22,7 +22,7 @@ systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
 # --- Over clcok raspberry pi & increase GPU
-sed -i '40i\over_voltage=2\narm_freq_min=800\narm_freq=1750\n' /boot/config.txt
+sed -i '40i\over_voltage=6\narm_freq_min=800\narm_freq=2000\n' /boot/config.txt
 
 # --- Disable Bluetooth & Wifi
 echo "
@@ -43,13 +43,13 @@ mv /opt/relay/.scripts/hosts /etc/hosts
 
 # --- Install Packages
 echo "#  ---  Installing New Packages  ---  #"
-apt install unattended-upgrades -y
+#apt install unattended-upgrades -y
 apt install ca-certificates -y
 apt install lsb-release -y
 apt install gnupg -y
 apt install curl -y
 apt install fail2ban -y
-apt install netdiscover -y
+#apt install netdiscover -y
 apt install samba samba-common-bin -y
 apt install shellinabox -y
 apt install python3-pip -y
@@ -84,15 +84,10 @@ mv /opt/relay/10-uname /etc/update-motd.d/ && chmod +x /etc/update-motd.d/10-una
 
 wget https://raw.githubusercontent.com/shellinabox/shellinabox/master/shellinabox/white-on-black.css -O /etc/shellinabox/white-on-black.css
 mv /opt/relay/.scripts/shellinabox /etc/default/shellinabox
-echo "
-0 0 1 * * netdiscover >> /relay/storage/netdiscover-log.txt" >>/etc/crontab
-chmod +x /opt/relay/.scripts/fanshim/examples/install-service.sh
-#./install-service.sh --on-threshold 65 --off-threshold 55 --delay 2 
-cd examples/ && ./install-service.sh --on-threshold 70 --off-threshold 60 --delay 3
 
 # --- Create and allocate swap
-echo "#  ---  Creating 4GB swap file  ---  #"
-fallocate -l 4G /swapfile
+echo "#  ---  Creating 2GB swap file  ---  #"
+fallocate -l 2G /swapfile
 # --- Sets permissions on swap
 chmod 600 /swapfile
 mkswap /swapfile && swapon /swapfile
