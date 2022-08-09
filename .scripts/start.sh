@@ -97,9 +97,7 @@ sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab' && cat /etc/fstab
 sh -c 'echo "apt autoremove -y" >> /etc/cron.monthly/autoremove'
 # --- Make file executable
 chmod +x /etc/cron.monthly/autoremove
-echo "#  ---  4GB swap file created | SYSTEM REBOOTING  ---  #"
-
-echo "#  ---  Running Fan Control  ---  #"
-cd fanshim && chmod +x install.sh && ./install.sh    
+echo "#  ---  2GB swap file created | SYSTEM REBOOTING  ---  #"
+ 
 reboot
 # ----> Next Script | security-samba.sh
