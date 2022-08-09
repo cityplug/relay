@@ -4,7 +4,7 @@
 
 # --- Remove Bloatware
 echo "#  ---  Removing Bloatware  ---  #"
-apt update && apt dist-upgrade -y && apt full-upgrade -y
+apt update && apt full-upgrade -y
 apt-get autoremove && apt-get autoclean -y
 rm -rf python_games && rm -rf /usr/games/
 apt-get purge --auto-remove libraspberrypi-dev libraspberrypi-doc -y
