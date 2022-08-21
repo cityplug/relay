@@ -19,10 +19,11 @@ echo "#  ---  Create samba user password --- #"
 smbpasswd -a shay
 echo
 /etc/init.d/smbd restart && /etc/init.d/nmbd restart
-# --- Mount USB
-echo "UUID=dfc48d93-5c04-45fb-a987-e82107d09081 /relay/tank/  auto   defaults,user,nofail  0   0" >> /etc/fstab
-mount -a
 echo "#  ---  Samba share created --- #"
 
 # ----> Next Script
 ./relay_net.sh
+
+# --- Mount USB
+#echo "UUID=dfc48d93-5c04-45fb-a987-e82107d09081 /relay/tank/  auto   defaults,user,nofail  0   0" >> /etc/fstab
+#mount -a

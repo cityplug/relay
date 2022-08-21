@@ -19,5 +19,3 @@ Uptime.............: ${UPTIME}
 $(tput sgr0)"
 df -hT /relay/tank
 echo
-df -hT /relay/
-echo
