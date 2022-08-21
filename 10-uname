@@ -17,7 +17,7 @@ IP Addresses.......: `ip a | grep glo | awk '{print $2}' | head -1 | cut -f1 -d/
 Uptime.............: ${UPTIME}
 
 $(tput sgr0)"
-df -hT /relay/storage
+df -hT /relay/tank
 echo
 df -hT /relay/
 echo

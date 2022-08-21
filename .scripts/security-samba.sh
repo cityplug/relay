@@ -20,7 +20,7 @@ smbpasswd -a shay
 echo
 /etc/init.d/smbd restart && /etc/init.d/nmbd restart
 # --- Mount USB
-echo "UUID=dfc48d93-5c04-45fb-a987-e82107d09081 /relay/storage/  auto   defaults,user,nofail  0   0" >> /etc/fstab
+echo "UUID=dfc48d93-5c04-45fb-a987-e82107d09081 /relay/tank/  auto   defaults,user,nofail  0   0" >> /etc/fstab
 mount -a
 echo "#  ---  Samba share created --- #"
 

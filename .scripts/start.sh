@@ -43,13 +43,11 @@ mv /opt/relay/.scripts/hosts /etc/hosts
 
 # --- Install Packages
 echo "#  ---  Installing New Packages  ---  #"
-#apt install unattended-upgrades -y
 apt install ca-certificates -y
 apt install lsb-release -y
 apt install gnupg -y
 apt install curl -y
 apt install fail2ban -y
-#apt install netdiscover -y
 apt install samba samba-common-bin -y
 apt install shellinabox -y
 apt install python3-pip -y
@@ -75,7 +73,7 @@ usermod -aG docker shay
 echo "#  ---  Running Addons  ---  #"
 mkdir -p /relay
 mkdir /relay/.AppData/ && chmod -R 777 /relay/.AppData
-mkdir /relay/storage/ && chmod -R 777 /relay/storage
+mkdir /relay/tank/ && chmod -R 777 /relay/tank
 mkdir /relay/public && chmod -R 777 /relay/public
 chown -R shay:sambashare /relay/*
 
