@@ -129,4 +129,3 @@ for ((i = 0; i < ${#CONFIG_TXT[@]}; i++)); do
 done
 
 printf "Done!\n"
-reboot
