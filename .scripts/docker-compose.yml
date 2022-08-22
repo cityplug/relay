@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
 
   cloudflare-ddns:
-    container_name: home-cloudflareDNS
+    container_name: cloudflareDNS
     image: oznu/cloudflare-ddns
     restart: always
     environment:

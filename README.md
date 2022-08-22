@@ -27,8 +27,8 @@ cd relay/.scripts/ && ./start.sh
 sudo su
 cd /opt/relay/.scripts/ && ./security-samba.sh
 --------------------------------------------------------------------------------
-# echo "
-# interface eth0
-# static ip_address=192.168.50.250/24
-# static routers=192.168.50.1" >> /etc/dhcpcd.conf
+echo "
+interface eth0
+static ip_address=192.168.50.250/24
+static routers=192.168.50.1" >> /etc/dhcpcd.conf
 ------------------------------------------------------------------------------
