@@ -22,7 +22,7 @@ systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
 # --- Over clcok raspberry pi & increase GPU
-sed -i '40i\over_voltage=6\narm_freq_min=800\narm_freq=2000\n' /boot/config.txt
+sed -i '40i\over_voltage=6\narm_freq_min=800\narm_freq=1850\n' /boot/config.txt
 
 # --- Disable Bluetooth & Wifi
 echo "
@@ -45,8 +45,6 @@ mv /opt/relay/.scripts/hosts /etc/hosts
 echo "#  ---  Installing New Packages  ---  #"
 apt install ca-certificates -y
 apt install lsb-release -y
-apt install gnupg -y
-apt install curl -y
 apt install fail2ban -y
 apt install samba samba-common-bin -y
 apt install shellinabox -y

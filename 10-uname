@@ -15,7 +15,7 @@ Date...............: `date +"%A, %e %B %Y, %r"`
 System.............: `uname -nsrmo`
 IP Addresses.......: `ip a | grep glo | awk '{print $2}' | head -1 | cut -f1 -d/` and `wget -q -O - http://icanhazip.com/ | tail`
 Uptime.............: ${UPTIME}
-Temperature........: vcgencmd measure_temp | grep  -o -E '[[:digit:]].*'
+Temperature........: `vcgencmd measure_temp | grep  -o -E '[[:digit:]].*'`
 
 $(tput sgr0)"
 df -hT /relay/tank
