@@ -1,4 +1,4 @@
-# Grant new user account with privileges & assign new privileges
+• Grant new user account with privileges & assign new privileges
 sudo usermod -aG sudo,root shay && sudo visudo
 # Add the following underneath User privilege specification 
     shay	ALL=(ALL:ALL) ALL 
