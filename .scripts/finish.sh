@@ -9,7 +9,7 @@ echo "#  ---  Running Fan Control  ---  #"
 cd fanshim && chmod +x install.sh && ./install.sh
 
 chmod +x /opt/relay/.scripts/fanshim/examples/install-service.sh
-cd examples/ && ./install-service.sh --on-threshold 60 --off-threshold 50 --delay 3 --brightness 30
+cd examples/ && ./install-service.sh --on-threshold 65 --off-threshold 55 --delay 5 --brightness 10
 
 echo "# --- Enter pihole user password --- #"
 docker exec -it pihole pihole -a -p
