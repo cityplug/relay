@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Raspbian (relay.machine v2.2) setup script.
+# Raspbian (relay.machine v2.3) setup script.
 
 # --- Remove Bloatware
 echo "#  ---  Removing Bloatware  ---  #"
@@ -13,21 +13,20 @@ apt-get purge --auto-remove libraspberrypi-dev libraspberrypi-doc -y
 echo "#  ---  Disabling Bloatware Services  ---  #"
 systemctl stop alsa-state.service hciuart.service sys-kernel-debug.mount \
 systemd-udev-trigger.service systemd-journald.service \
-systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
+systemd-fsck-root.service systemd-logind.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
 systemctl disable alsa-state.service hciuart.service sys-kernel-debug.mount \
 systemd-udev-trigger.service systemd-journald.service \
-systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
+systemd-fsck-root.service systemd-logind.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
 # --- Over clcok raspberry pi & increase GPU
-sed -i '40i\over_voltage=6\narm_freq_min=800\narm_freq=1850\n' /boot/config.txt
+# sed -i '40i\over_voltage=6\narm_freq_min=800\narm_freq=1850\n' /boot/config.txt
 
-# --- Disable Bluetooth & Wifi
+# --- Disable Bluetooth & Splash
 echo "
 disable_splash=1
-dtoverlay=disable-wifi
 dtoverlay=disable-bt" >> /boot/config.txt
 
 # --- Change root password
@@ -37,14 +36,12 @@ echo "#  ---  Root password changed  ---  #"
 
 # --- Initialzing relay
 hostnamectl set-hostname relay.home.lan
-hostnamectl set-hostname "Relay Machine" --pretty
+hostnamectl set-hostname "Relay Host Machine" --pretty
 rm -rf /etc/hosts
 mv /opt/relay/.scripts/hosts /etc/hosts
 
 # --- Install Packages
 echo "#  ---  Installing New Packages  ---  #"
-apt install ca-certificates -y
-apt install lsb-release -y
 apt install fail2ban -y
 apt install samba samba-common-bin -y
 apt install shellinabox -y
@@ -71,7 +68,8 @@ usermod -aG docker shay
 echo "#  ---  Running Addons  ---  #"
 mkdir -p /relay
 mkdir /relay/.AppData/ && chmod -R 777 /relay/.AppData
-mkdir /relay/tank/ && chmod -R 777 /relay/tank
+mkdir /relay/store/ && chmod -R 777 /relay/store
+mkdir /relay/.v_bin/ && chmod -R 777 /relay/.v_bin
 mkdir /relay/public && chmod -R 777 /relay/public
 chown -R shay:sambashare /relay/*
 
@@ -80,6 +78,11 @@ mv /opt/relay/10-uname /etc/update-motd.d/ && chmod +x /etc/update-motd.d/10-una
 
 wget https://raw.githubusercontent.com/shellinabox/shellinabox/master/shellinabox/white-on-black.css -O /etc/shellinabox/white-on-black.css
 mv /opt/relay/.scripts/shellinabox /etc/default/shellinabox
+
+# --- Security Addons
+groupadd ssh-users
+usermod -aG ssh-users shay
+sed -i '15i\AllowGroups ssh-users\n' /etc/ssh/sshd_config
 
 # --- Create and allocate swap
 echo "#  ---  Creating 2GB swap file  ---  #"

@@ -23,14 +23,22 @@ services:
       relay_net:
         ipv4_address: 192.168.50.253
 
-  unifi:
-    container_name: unifi
+  unbound:
+    container_name: unbound
+    image: mvance/unbound:latest
+    volumes:
+      - /relay/.AppData/unbound:/opt/unbound/etc/unbound/
+    ports:
+      - 5335:53/upd
+      - 5335:53/tcp
+    restart: always
+
+  unifi_home:
+    container_name: unifi_home
     image: lscr.io/linuxserver/unifi-controller:latest
     environment:
       PUID: 0
       PGID: 0
-      MEM_LIMIT: 1024
-      MEM_STARTUP: 1024
     hostname: unifi
     volumes:
       - /relay/.AppData/unifi/config:/config
@@ -40,9 +48,29 @@ services:
       - 8080:8080
       - 8443:8443
       - 1900:1900/udp
-      - 6789:6789
-      - 5514:5514/udp
     restart: unless-stopped
+
+  unifi_remote:
+    container_name: unifi_remote
+    image: lscr.io/linuxserver/unifi-controller:latest
+    environment:
+      PUID: 0
+      PGID: 0
+      MEM_LIMIT: 1024
+      MEM_STARTUP: 1024
+      ServerIP: 192.168.50.250
+    hostname: unifi
+    volumes:
+      - /relay/.AppData/unifi/remote/config:/config
+    ports:
+      - 3478:3478/udp
+      - 8080:8080
+      - 8443:8443
+      - 6789:6789
+    restart: unless-stopped
+    networks:
+      relay_net:
+        ipv4_address: 192.168.50.250
 
   cloudflare-ddns:
     container_name: cloudflareDNS
@@ -56,14 +84,46 @@ services:
       SUBDOMAIN: home.cityplug.co.uk
 
   portainer:
-    container_name: portainer_agent
-    image: portainer/agent:2.11.1
+    container_name: portainer
+    image: portainer/portainer-ce:latest
     restart: always
-    ports:
-      - "9001:9001"
-    environment:
-      - TZ=Europe/London
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/volumes:/var/lib/docker/volumes
-      - /relay/.AppData/portainer:/data
+      - /relay/.AppData/portainer/data:/data
+    ports:
+      - 9000:9000
+  
+  homer:
+    container_name: homer
+    image: b4bz/homer:latest
+    hostname: homer  
+    volumes:
+      - /relay/.AppData/homer/assets:/www/assets
+    ports:
+      - 85:8080
+    restart: always
+
+  wg-easy:
+    environment:
+      PASSWORD: T1jan331
+      WG_HOST: home.cityplug.co.uk
+      WG_PORT: 24792
+      WG_PERSISTENT_KEEPALIVE: 25
+      WG_DEFAULT_ADDRESS: 10.25.50.x
+      WG_DEFAULT_DNS: 1.1.1.1
+      WG_ALLOWED_IPS: 0.0.0.0/0, 192.168.50.1/24
+      
+    image: weejewel/wg-easy:latest
+    container_name: wireguard
+    volumes:
+      - /relay/.AppData/wireguard/:/etc/wireguard
+    ports:
+      - "24792:51820/udp"
+      - "24792:51821/tcp"
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1

@@ -1,0 +1,121 @@
+---
+title: "Relay Host Dashboard"
+subtitle: "Home"
+
+header: false
+footer: '<p><a href="https://github.com/cityplug?tab=repositories"><i class="fab fa-github-alt"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://redi1.soccerstreams.net/"><i class="fas fa-futbol"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www3.gogoanime.cm/category/shingeki-no-kyojin-the-final-season-part-2"><i class="fas fa-dragon"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://anydesk.com/uk/downloads/thank-you?dv=win_exe"><i class="fas fa-download"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://dash.cloudflare.com/login/"><i class="fa-brands fa-cloudflare"></i></a></p>'
+target: "_blank" # optional html a tag target attribute
+
+stylesheet:
+  - "assets/custom.css"
+
+columns: "4" # Change this to any number: (1, 2, 3, 4, 6, 12)
+colors:
+  dark:
+    highlight-primary: "#181C3A"
+    highlight-secondary: "#181C3A"
+    highlight-hover: "#1F2347"
+    background: "#12152B"
+    card-background: "#181C3A"
+    text: "#EAEAEA"
+    text-header: "#7C71DD"
+    text-title: "#C1C1C1"
+    text-subtitle: "#8B8D9C"
+    card-shadow: rgba(0, 0, 0, 0.5)
+    link: "#C1C1C1"
+    link-hover: "#C1C1C1"
+    background-image: "../assets/wallpaper.jpeg"
+
+  light:
+    highlight-primary: "#181C3A"
+    highlight-secondary: "#181C3A"
+    highlight-hover: "#1F2347"
+    background: "#12152B"
+    card-background: "#181C3A"
+    text: "#EAEAEA"
+    text-header: "#7C71DD"
+    text-title: "#C1C1C1"
+    text-subtitle: "#8B8D9C"
+    card-shadow: rgba(0, 0, 0, 0.5)
+    link: "#C1C1C1"
+    link-hover: "#C1C1C1"
+    background-image: "../assets/wallpaper.jpeg"
+
+links:
+ - name: "Google.co.uk"
+   icon: "fas fa-search"
+   url: "https://www.google.co.uk/?gws_rd=ssl"
+   target: "_blank" # optional html a tag target attribute
+
+services:
+  - name: "//Hardware"
+    icon: "fa-solid fa-server"
+    items:
+      - name: "Wireguard"
+        logo: "assets/tools/wireguard.png"
+        subtitle: "VPN Server"
+        tag: "app"
+        tagstyle: "is-link"
+        url: "http://192.168.50.254:24792/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "PVE"
+        logo: "assets/tools/pve.png"
+        subtitle: "Proxmox VE"
+        tag: "core"
+        tagstyle: "is-link"
+        url: "https://192.168.50.11:8006"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Shell"
+        logo: "assets/tools/shell.png"
+        subtitle: ""
+        tag: "core"
+        tagstyle: "is-link"
+        url: "https://192.168.50.254:6105/"
+        target: "_blank" # optional html a tag target attribute
+
+  - name: "//Services"
+    icon: "fa-solid fa-gears"
+    items:
+      - name: "Pihole"
+        logo: "assets/tools/pihole.png"
+        subtitle: "DNS"
+        tag: "service"
+        tagstyle: "is-success"
+        url: "http://192.168.50.253/admin/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Unifi Remote"
+        logo: "assets/tools/controller.png"
+        subtitle: "Ubiquiti Remote"
+        tag: "core"
+        tagstyle: "is-link"
+        url: "https://unifi.cityplug.co.uk:8443"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Unifi Home"
+        logo: "assets/tools/controller.png"
+        subtitle: "Ubiquiti Home"
+        tag: "core"
+        tagstyle: "is-link"
+        url: "https://192.168.50.254:8443"
+        target: "_blank" # optional html a tag target attribute
+
+  - name: "//Management"
+    icon: "fa-solid fa-folder-open"
+    items:
+      - name: "Portainer"
+        logo: "assets/tools/portainer.png"
+        subtitle: "Docker UI"
+        tag: "core"
+        tagstyle: "is-link"
+        url: "http://192.168.50.250:9000/#!/auth"
+        target: "_blank" # optional html a tag target attribute
+
+  - name: "//Estate"
+    icon: "fa-solid fa-house-lock"
+    items:
+      - name: "Picasso"
+        logo: "assets/tools/ghost.png"
+        subtitle: ""
+        tag: "bridge"
+        tagstyle: "is-link"
+        url: "#picasso"
+#        target: "_blank" # optional html a tag target attribute

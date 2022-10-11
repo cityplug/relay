@@ -1,0 +1,38 @@
+---
+
+subtitle: "Esate Management"
+
+# This overwrites message config. Setting it to empty to remove message from this page and keep it only in the main one:
+message: ~
+
+# as we want to include a differente link here (so we can get back to home page), we need to replicate all links or they will be revome when overwriting the links field:
+links:
+  - name: "Home"
+    icon: "fas fa-home"
+    url: "#"
+#  - name: "Contribute"
+#    icon: "fab fa-github"
+#    url: "https://github.com/bastienwirtz/homer"
+#    target: "_blank" # optional html a tag target attribute
+#  - name: "Wiki"
+#    icon: "fas fa-book"
+#    url: "https://www.wikipedia.org/"
+
+services:
+  - name: "// Remote Services"
+#    icon: "fas fa-cloud"
+    items:
+      - name: "Unifi Remote"
+        logo: "assets/tools/unifi.png"
+        subtitle: "Ubiquiti Remote Management"
+        tag: "core"
+        tagstyle: "is-link"
+        url: "https://unifi.cityplug.co.uk:8443"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Home Assistant "
+        logo: "assets/tools/ha.png"
+        subtitle: "Automation Panel"
+        tag: "core"
+        tagstyle: "is-link"
+        url: "http://192.168.50.15:8123"
+        target: "_blank" # optional html a tag target attribute

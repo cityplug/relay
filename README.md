@@ -17,9 +17,9 @@
 #### PasswordAuthentication “no”
     reboot
 --------------------------------------------------------------------------------
+### Run the following scripts
     sudo su
-    cd /opt
-    apt install git -y && git clone https://github.com/cityplug/relay && chmod +x relay/.scripts/*
+    cd /opt && apt install git -y && git clone https://github.com/cityplug/relay && chmod +x relay/.scripts/*
 ------------------------------------------------------------------------------
 ### Run the following scripts
     cd relay/.scripts/ && ./start.sh

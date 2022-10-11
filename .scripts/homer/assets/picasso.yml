@@ -1,0 +1,45 @@
+---
+
+subtitle: "Pixle Management"
+
+# This overwrites message config. Setting it to empty to remove message from this page and keep it only in the main one:
+message: ~
+
+# as we want to include a differente link here (so we can get back to home page), we need to replicate all links or they will be revome when overwriting the links field:
+links:
+  - name: "Home"
+    icon: "fas fa-home"
+    url: "#"
+#  - name: "Contribute"
+#    icon: "fab fa-github"
+#    url: "https://github.com/bastienwirtz/homer"
+#    target: "_blank" # optional html a tag target attribute
+#  - name: "Wiki"
+#    icon: "fas fa-book"
+#    url: "https://www.wikipedia.org/"
+
+services:
+  - name: "// Remote Services"
+#    icon: "fas fa-cloud"
+    items:
+      - name: "Pixle.Pihole"
+        logo: "assets/tools/pihole.png"
+        subtitle: "DNS"
+        tag: "service"
+        tagstyle: "is-success"
+        url: ""
+        target: "_blank" # optional html a tag target attribute
+      - name: "ReoLink"
+        logo: "assets/tools/reo.png"
+        subtitle: ""
+        tag: "link"
+        tagstyle: "is-link"
+        url: ""
+        target: "_blank" # optional html a tag target attribute
+      - name: "Shell"
+        logo: "assets/tools/shell.png"
+        subtitle: ""
+        tag: "core"
+        tagstyle: "is-link"
+        url: ""
+        target: "_blank" # optional html a tag target attribute
