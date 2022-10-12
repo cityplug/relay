@@ -1,10 +1,5 @@
 #!/bin/bash
 
-echo "
-net.ipv4.ip_forward = 1
-net.ipv6.conf.all.forwarding = 1" >> /etc/sysctl.conf
-sysctl -p
-
 echo "#  ---  Running Fan Control  ---  #"
 cd fanshim && chmod +x install.sh && ./install.sh
 
@@ -14,7 +9,7 @@ cd examples/ && ./install-service.sh --on-threshold 65 --off-threshold 55 --dela
 # --- Build Homer
 docker stop homer
 rm -rf /relay/.AppData/homer/*
-mv /opt/pve/relay/.scripts/homer/assets /relay/.AppData/homer/assets
+mv /opt/relay/.scripts/homer/assets /relay/.AppData/homer/assets
 docker start homer
 
 # Setting failover

@@ -56,7 +56,7 @@ echo \
 
 apt update && apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
-curl -L "https://github.com/docker/compose/releases/download/$(curl https://github.com/docker/compose/releases | grep -m1 '<a href="/docker/compose/releases/download/' | grep -o 'v[0-9:].[0-9].[0-9]')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+wget https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-aarch64 -O /usr/local/bin/docker-compose
 
 chmod +x /usr/local/bin/docker-compose && apt install docker-compose -y
 
@@ -87,12 +87,10 @@ sed -i '15i\AllowGroups ssh-users\n' /etc/ssh/sshd_config
 # --- Create and allocate swap
 echo "#  ---  Creating 2GB swap file  ---  #"
 fallocate -l 2G /swapfile
-# --- Sets permissions on swap
 chmod 600 /swapfile
 mkswap /swapfile && swapon /swapfile
 # --- Add swap to the /fstab file & Verify command
 sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab' && cat /etc/fstab
-# --- Clear older versions
 sh -c 'echo "apt autoremove -y" >> /etc/cron.monthly/autoremove'
 # --- Make file executable
 chmod +x /etc/cron.monthly/autoremove

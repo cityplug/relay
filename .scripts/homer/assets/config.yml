@@ -91,7 +91,7 @@ services:
         url: "https://unifi.cityplug.co.uk:8443"
         target: "_blank" # optional html a tag target attribute
       - name: "Unifi Home"
-        logo: "assets/tools/controller.png"
+        logo: "assets/tools/unifi.png"
         subtitle: "Ubiquiti Home"
         tag: "core"
         tagstyle: "is-link"

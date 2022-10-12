@@ -17,9 +17,10 @@ echo
 /etc/init.d/smbd restart && /etc/init.d/nmbd restart
 echo "#  ---  Samba share created --- #"
 
+echo "
+net.ipv4.ip_forward = 1
+net.ipv6.conf.all.forwarding = 1" >> /etc/sysctl.conf
+sysctl -p
+
 # ----> Next Script
 ./relay_net.sh
-
-# --- Mount USB
-#echo "UUID=dfc48d93-5c04-45fb-a987-e82107d09081 /relay/tank/  auto   defaults,user,nofail  0   0" >> /etc/fstab
-#mount -a
