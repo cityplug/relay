@@ -43,8 +43,12 @@ colors:
 
 links:
  - name: "Google.co.uk"
-   icon: "fas fa-search"
+   icon: "fa-brands fa-google"
    url: "https://www.google.co.uk/?gws_rd=ssl"
+   target: "_blank" # optional html a tag target attribute
+ - name: "Youtube"
+   icon: "fa-brands fa-youtube"
+   url: "https://www.youtube.com/"
    target: "_blank" # optional html a tag target attribute
 
 services:

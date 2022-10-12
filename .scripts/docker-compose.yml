@@ -105,7 +105,7 @@ services:
 
   wg-easy:
     environment:
-      PASSWORD: T1jan331
+      PASSWORD: T1jan333
       WG_HOST: home.cityplug.co.uk
       WG_PORT: 24792
       WG_PERSISTENT_KEEPALIVE: 25
