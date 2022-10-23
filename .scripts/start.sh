@@ -35,7 +35,7 @@ passwd root
 echo "#  ---  Root password changed  ---  #"
 
 # --- Initialzing relay
-hostnamectl set-hostname relay.home.loc
+hostnamectl set-hostname relay.home.lan
 hostnamectl set-hostname "Relay Host Machine" --pretty
 rm -rf /etc/hosts
 mv /opt/relay/.scripts/hosts /etc/hosts
