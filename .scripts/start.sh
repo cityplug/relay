@@ -13,20 +13,21 @@ apt-get purge --auto-remove libraspberrypi-dev libraspberrypi-doc -y
 echo "#  ---  Disabling Bloatware Services  ---  #"
 systemctl stop alsa-state.service hciuart.service sys-kernel-debug.mount \
 systemd-udev-trigger.service systemd-journald.service \
-systemd-fsck-root.service systemd-logind.service \
+systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
 systemctl disable alsa-state.service hciuart.service sys-kernel-debug.mount \
 systemd-udev-trigger.service systemd-journald.service \
-systemd-fsck-root.service systemd-logind.service \
+systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
 # --- Over clcok raspberry pi & increase GPU
 # sed -i '40i\over_voltage=6\narm_freq_min=800\narm_freq=1850\n' /boot/config.txt
 
-# --- Disable Bluetooth & Splash
+# --- Disable Bluetooth/WIFI & Splash
 echo "
 disable_splash=1
+dtoverlay=disable-wifi
 dtoverlay=disable-bt" >> /boot/config.txt
 
 # --- Change root password
