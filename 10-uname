@@ -18,5 +18,5 @@ Uptime.............: ${UPTIME}
 Temperature........: `vcgencmd measure_temp | grep  -o -E '[[:digit:]].*'`
 
 $(tput sgr0)"
-df -hT /relay/tank
+df -hT /relay/store
 echo

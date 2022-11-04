@@ -112,6 +112,13 @@ services:
         tagstyle: "is-link"
         url: "http://192.168.50.250:9000/#!/auth"
         target: "_blank" # optional html a tag target attribute
+      - name: "Files"
+        logo: "assets/tools/files.png"
+        subtitle: ""
+        tag: "link"
+        tagstyle: "is-link"
+        url: "http://192.168.50.254:8222"
+        target: "_blank" # optional html a tag target attribute
 
   - name: "//Estate"
     icon: "fa-solid fa-house-lock"

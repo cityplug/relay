@@ -26,6 +26,8 @@
     sudo su
     cd /opt/relay/.scripts/ && ./security-samba.sh
 --------------------------------------------------------------------------------
+    docker exec zerotier-one zerotier-cli join
+--------------------------------------------------------------------------------
     echo "
     interface eth0
     static ip_address=192.168.50.254/24

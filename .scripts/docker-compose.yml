@@ -103,6 +103,30 @@ services:
       - 85:8080
     restart: always
 
+  zerotier:
+    container_name: zerotier
+    image: zyclonite/zerotier:latest
+    devices:
+      - /dev/net/run
+    network_mode: host
+    volumes:
+      - /relay/.AppData/zerotier:/var/lib/zerotier-one
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+
+  filebrowser:
+    container_name: filebrowser
+    image: filebrowser/filebrowser:latest
+    user: 0:0
+    volume: 
+      - /relay/:/srv
+    ports:
+      - 8222:80
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
   wg-easy:
     environment:
       PASSWORD: T1jan333
