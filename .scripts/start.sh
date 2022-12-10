@@ -47,6 +47,7 @@ apt install fail2ban -y
 apt install samba samba-common-bin -y
 apt install shellinabox -y
 apt install python3-pip -y
+apt install wakeonlan -y
 # --- Install Docker & Docker-Compose
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
