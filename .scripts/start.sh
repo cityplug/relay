@@ -64,7 +64,7 @@ chmod +x /usr/local/bin/docker-compose && apt install docker-compose -y
 
 systemctl enable docker
 docker-compose --version && docker --version
-usermod -aG docker shay
+usermod -aG docker focal
 
 # --- Addons
 echo "#  ---  Running Addons  ---  #"
@@ -73,7 +73,7 @@ mkdir /relay/.AppData/ && chmod -R 777 /relay/.AppData
 mkdir /relay/store/ && chmod -R 777 /relay/store
 mkdir /relay/.v_bin/ && chmod -R 777 /relay/.v_bin
 mkdir /relay/public && chmod -R 777 /relay/public
-chown -R shay:sambashare /relay/*
+chown -R focal:sambashare /relay/*
 
 rm -rf /etc/update-motd.d/* && rm -rf /etc/motd
 mv /opt/relay/10-uname /etc/update-motd.d/ && chmod +x /etc/update-motd.d/10-uname
@@ -83,7 +83,7 @@ mv /opt/relay/.scripts/shellinabox /etc/default/shellinabox
 
 # --- Security Addons
 groupadd ssh-users
-usermod -aG ssh-users shay
+usermod -aG ssh-users focal
 sed -i '15i\AllowGroups ssh-users\n' /etc/ssh/sshd_config
 
 # --- Create and allocate swap

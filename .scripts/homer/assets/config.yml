@@ -62,13 +62,6 @@ services:
         tagstyle: "is-link"
         url: "http://192.168.50.254:24792/"
         target: "_blank" # optional html a tag target attribute
-      - name: "PVE"
-        logo: "assets/tools/pve.png"
-        subtitle: "Proxmox VE"
-        tag: "core"
-        tagstyle: "is-link"
-        url: "https://192.168.50.11:8006"
-        target: "_blank" # optional html a tag target attribute
       - name: "Shell"
         logo: "assets/tools/shell.png"
         subtitle: ""

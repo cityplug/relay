@@ -1,13 +1,13 @@
 #### Grant new user account with privileges & assign new privileges
-    sudo usermod -aG sudo,root shay && sudo visudo
+    sudo usermod -aG sudo,root focal && sudo visudo
 #### Add the following underneath User privilege specification 
-        shay	ALL=(ALL:ALL) ALL 
+        focal	ALL=(ALL:ALL) ALL 
 #### Add the following to the bottom of file under includedir /etc/sudoers.d 
-        shay ALL=(ALL) NOPASSWD: ALL
+        focal ALL=(ALL) NOPASSWD: ALL
 #### Copy ssh key to server
     sudo su
-    mkdir -p /home/shay/.ssh/ && touch /home/shay/.ssh/authorized_keys
-    curl https://github.com/cityplug.keys >> /home/shay/.ssh/authorized_keys
+    mkdir -p /home/focal/.ssh/ && touch /home/focal/.ssh/authorized_keys
+    curl https://github.com/cityplug.keys >> /home/focal/.ssh/authorized_keys
 #### Secure SSH Server by changing default port
     nano -w /etc/ssh/sshd_config
 #### Find the line that says “#Port 22” and change it to desired port 
