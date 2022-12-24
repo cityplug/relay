@@ -70,7 +70,7 @@ usermod -aG docker focal
 echo "#  ---  Running Addons  ---  #"
 mkdir -p /relay
 mkdir /relay/.AppData/ && chmod -R 777 /relay/.AppData
-mkdir /relay/store/ && chmod -R 777 /relay/store
+mkdir /relay/wallet/ && chmod -R 777 /relay/wallet
 mkdir /relay/.v_bin/ && chmod -R 777 /relay/.v_bin
 mkdir /relay/public && chmod -R 777 /relay/public
 chown -R focal:sambashare /relay/*

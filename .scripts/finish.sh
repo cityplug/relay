@@ -13,8 +13,8 @@ mv /opt/relay/.scripts/homer/assets /relay/.AppData/homer/assets
 docker start homer
 
 # Setting failover
-mv /opt/relay/.scripts/soft_restart /usr/local/bin/comms_check
-mv /opt/relay/.scripts/hard_restart /usr/local/bin/force_comms_check
+#mv /opt/relay/.scripts/soft_restart.sh /usr/local/bin/comms_check
+#mv /opt/relay/.scripts/hard_restart.sh /usr/local/bin/force_comms_check
 
 echo "
 */5 * * * * /usr/bin/sudo -H /usr/local/bin/comms_check.sh >> /dev/null 2>&1
