@@ -118,7 +118,9 @@ services:
   filebrowser:
     container_name: filebrowser
     image: filebrowser/filebrowser:latest
-    user: 0:0
+    environment:
+      PUID: 0
+      PGID: 0
     volume: 
       - /relay/:/srv
     ports:

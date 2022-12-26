@@ -73,6 +73,7 @@ mkdir /relay/.AppData/ && chmod -R 777 /relay/.AppData
 mkdir /relay/wallet/ && chmod -R 777 /relay/wallet
 mkdir /relay/.v_bin/ && chmod -R 777 /relay/.v_bin
 mkdir /relay/public && chmod -R 777 /relay/public
+chown focal /relay
 chown -R focal:sambashare /relay/*
 
 rm -rf /etc/update-motd.d/* && rm -rf /etc/motd

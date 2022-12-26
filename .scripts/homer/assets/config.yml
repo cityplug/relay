@@ -116,10 +116,10 @@ services:
   - name: "//Estate"
     icon: "fa-solid fa-house-lock"
     items:
-      - name: "Picasso"
+      - name: "Pluto"
         logo: "assets/tools/ghost.png"
         subtitle: ""
         tag: "bridge"
         tagstyle: "is-link"
-        url: "#picasso"
+        url: "#pluto"
 #        target: "_blank" # optional html a tag target attribute
