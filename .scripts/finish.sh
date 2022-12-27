@@ -4,7 +4,7 @@ echo "#  ---  Running Fan Control  ---  #"
 cd fanshim && chmod +x install.sh && ./install.sh
 
 chmod +x /opt/relay/.scripts/fanshim/examples/install-service.sh
-cd examples/ && ./install-service.sh --on-threshold 65 --off-threshold 55 --delay 5 --brightness 10
+cd examples/ && ./install-service.sh --on-threshold 75 --off-threshold 65 --delay 15 --brightness 10
 
 # --- Build Homer
 docker stop homer
@@ -13,8 +13,8 @@ mv /opt/relay/.scripts/homer/assets /relay/.AppData/homer/assets
 docker start homer
 
 # Setting failover
-#mv /opt/relay/.scripts/soft_restart.sh /usr/local/bin/comms_check
-#mv /opt/relay/.scripts/hard_restart.sh /usr/local/bin/force_comms_check
+mv /opt/relay/.scripts/soft_restart.sh /usr/local/bin/comms_check
+mv /opt/relay/.scripts/hard_restart.sh /usr/local/bin/force_comms_check
 
 echo "
 */5 * * * * /usr/bin/sudo -H /usr/local/bin/comms_check.sh >> /dev/null 2>&1

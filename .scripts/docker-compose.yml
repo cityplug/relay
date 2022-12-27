@@ -84,14 +84,17 @@ services:
       SUBDOMAIN: home.cityplug.co.uk
 
   portainer:
-    container_name: portainer
-    image: portainer/portainer-ce:latest
+    container_name: portainer_agent
+    image: portainer/agent:2.11.1
     restart: always
+    ports:
+      - "9001:9001"
+    environment:
+      - TZ=Europe/London
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /relay/.AppData/portainer/data:/data
-    ports:
-      - 9000:9000
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+      - /relay/.AppData/portainer:/data
   
   homer:
     container_name: homer
