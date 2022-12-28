@@ -75,6 +75,7 @@ mkdir /relay/.v_bin/ && chmod -R 777 /relay/.v_bin
 mkdir /relay/public && chmod -R 777 /relay/public
 chown focal /relay
 chown -R focal:sambashare /relay/*
+chown -R nobody.nogroup /relay/public
 
 rm -rf /etc/update-motd.d/* && rm -rf /etc/motd
 mv /opt/relay/10-uname /etc/update-motd.d/ && chmod +x /etc/update-motd.d/10-uname

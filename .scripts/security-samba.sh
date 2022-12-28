@@ -3,16 +3,21 @@
 mv /opt/relay/.scripts/jail.local /etc/fail2ban/jail.local
 
 # --- Setup samba share and config
+
+echo "#  ---  Create samba user password --- #"
+smbpasswd -a focal
+echo "#  ---  Create GUEST samba user password --- #"
+smbpasswd -a home
+
 echo "#  ---  Setting up samba share --- #"
 usermod -aG sambashare focal
+usermod -aG sambashare home
 chmod -R 777 /relay/*
 
 systemctl stop smbd
 mv /etc/samba/smb.conf /etc/samba/smb.conf.bak
 mv /opt/relay/.scripts/smb.conf /etc/samba/
 
-echo "#  ---  Create samba user password --- #"
-smbpasswd -a focal
 echo
 /etc/init.d/smbd restart && /etc/init.d/nmbd restart
 echo "#  ---  Samba share created --- #"
