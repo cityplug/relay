@@ -95,16 +95,16 @@ services:
         url: "https://192.168.50.254:8443"
         target: "_blank" # optional html a tag target attribute
 
-  - name: "//Management"
-    icon: "fa-solid fa-folder-open"
-    items:
-      - name: "Files"
-        logo: "assets/tools/files.png"
-        subtitle: ""
-        tag: "link"
-        tagstyle: "is-link"
-        url: "http://192.168.50.254:8222"
-        target: "_blank" # optional html a tag target attribute
+#  - name: "//Management"
+#    icon: "fa-solid fa-folder-open"
+#    items:
+#      - name: "Files"
+#        logo: "assets/tools/files.png"
+#        subtitle: ""
+#        tag: "link"
+#        tagstyle: "is-link"
+#        url: "http://192.168.50.254:8222"
+#        target: "_blank" # optional html a tag target attribute
 
   - name: "//Estate"
     icon: "fa-solid fa-house-lock"
