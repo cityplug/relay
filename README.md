@@ -15,7 +15,7 @@
 #### PermitRootLogin “no”
 #### Scroll down further and find “PasswordAuthentication” and again change to “no” 
 #### PasswordAuthentication “no”
-    reboot
+    apt update && apt upgrade -y && reboot
 --------------------------------------------------------------------------------
 ### Run the following scripts
     sudo su
