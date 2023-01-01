@@ -44,7 +44,7 @@ mv /opt/relay/.scripts/hosts /etc/hosts
 # --- Install Packages
 echo "#  ---  Installing New Packages  ---  #"
 apt install samba samba-common-bin -y
-apt install shellinabox -y
+#apt install shellinabox -y
 apt install python3-pip -y
 # --- Install CockPit
 . /etc/os-release

@@ -9,7 +9,7 @@ target: "_blank" # optional html a tag target attribute
 stylesheet:
   - "assets/custom.css"
 
-columns: "3" # Change this to any number: (1, 2, 3, 4, 6, 12)
+columns: "4" # Change this to any number: (1, 2, 3, 4, 6, 12)
 colors:
   dark:
     highlight-primary: "#181C3A"
@@ -62,13 +62,13 @@ services:
         tagstyle: "is-link"
         url: "http://192.168.50.254:24792/"
         target: "_blank" # optional html a tag target attribute
-      - name: "Shell"
-        logo: "assets/tools/shell.png"
-        subtitle: ""
-        tag: "core"
-        tagstyle: "is-link"
-        url: "https://192.168.50.254:6105/"
-        target: "_blank" # optional html a tag target attribute
+#      - name: "Shell"
+#        logo: "assets/tools/shell.png"
+#        subtitle: ""
+#        tag: "core"
+#        tagstyle: "is-link"
+#        url: "https://192.168.50.254:6105/"
+#        target: "_blank" # optional html a tag target attribute
 
   - name: "//Services"
     icon: "fa-solid fa-gears"
@@ -95,16 +95,16 @@ services:
         url: "https://192.168.50.254:8443"
         target: "_blank" # optional html a tag target attribute
 
-#  - name: "//Management"
-#    icon: "fa-solid fa-folder-open"
-#    items:
-#      - name: "Files"
-#        logo: "assets/tools/files.png"
-#        subtitle: ""
-#        tag: "link"
-#        tagstyle: "is-link"
-#        url: "http://192.168.50.254:8222"
-#        target: "_blank" # optional html a tag target attribute
+  - name: "//Management"
+    icon: "fa-solid fa-folder-open"
+    items:
+      - name: "Cockpit"
+        logo: "assets/tools/cockpit.png"
+        subtitle: ""
+        tag: "link"
+        tagstyle: "is-link"
+        url: "http://192.168.50.254:9090"
+        target: "_blank" # optional html a tag target attribute
 
   - name: "//Estate"
     icon: "fa-solid fa-house-lock"
