@@ -26,7 +26,7 @@
     sudo su
     cd /opt/relay/.scripts/ && ./security-samba.sh
 --------------------------------------------------------------------------------
-    docker exec zerotier-one zerotier-cli join
+    docker exec zerotier zerotier-cli join 8bd5124fd6badc1f
 --------------------------------------------------------------------------------
     echo "
     interface eth0

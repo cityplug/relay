@@ -43,11 +43,14 @@ mv /opt/relay/.scripts/hosts /etc/hosts
 
 # --- Install Packages
 echo "#  ---  Installing New Packages  ---  #"
-apt install fail2ban -y
 apt install samba samba-common-bin -y
 apt install shellinabox -y
 apt install python3-pip -y
-apt install wakeonlan -y
+# --- Install CockPit
+. /etc/os-release
+echo "deb http://deb.debian.org/debian ${VERSION_CODENAME}-backports main" > \
+    /etc/apt/sources.list.d/backports.list
+apt install -t ${VERSION_CODENAME}-backports cockpit
 # --- Install Docker & Docker-Compose
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -89,8 +92,8 @@ usermod -aG ssh-users focal
 sed -i '15i\AllowGroups ssh-users\n' /etc/ssh/sshd_config
 
 # --- Create and allocate swap
-echo "#  ---  Creating 2GB swap file  ---  #"
-fallocate -l 2G /swapfile
+echo "#  ---  Creating 1GB swap file  ---  #"
+fallocate -l 1G /swapfile
 chmod 600 /swapfile
 mkswap /swapfile && swapon /swapfile
 # --- Add swap to the /fstab file & Verify command
@@ -98,7 +101,7 @@ sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab' && cat /etc/fstab
 sh -c 'echo "apt autoremove -y" >> /etc/cron.monthly/autoremove'
 # --- Make file executable
 chmod +x /etc/cron.monthly/autoremove
-echo "#  ---  2GB swap file created | SYSTEM REBOOTING  ---  #"
+echo "#  ---  1GB swap file created | SYSTEM REBOOTING  ---  #"
  
 reboot
 # ----> Next Script | security-samba.sh

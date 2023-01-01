@@ -9,7 +9,6 @@ smbpasswd -a home
 
 echo "#  ---  Setting up samba share --- #"
 usermod -aG sambashare focal
-usermod -aG sambashare home
 chmod -R 777 /relay/*
 
 systemctl stop smbd
