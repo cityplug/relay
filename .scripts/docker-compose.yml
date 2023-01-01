@@ -23,15 +23,15 @@ services:
       relay_net:
         ipv4_address: 192.168.50.253
 
-  unbound:
-    container_name: unbound
-    image: mvance/unbound:latest
-    volumes:
-      - /relay/.AppData/unbound:/opt/unbound/etc/unbound/
-    ports:
-      - 5335:53/udp
-      - 5335:53/tcp
-    restart: always
+#  unbound:
+#    container_name: unbound
+#    image: mvance/unbound:latest
+#    volumes:
+#      - /relay/.AppData/unbound:/opt/unbound/etc/unbound/
+#    ports:
+#      - 5335:53/udp
+#      - 5335:53/tcp
+#    restart: always
 
   unifi_home:
     container_name: unifi_home
@@ -106,17 +106,17 @@ services:
       - 85:8080
     restart: always
 
-  zerotier:
-    container_name: zerotier
-    image: zyclonite/zerotier:latest
-    devices:
-      - /dev/net/run
-    network_mode: host
-    volumes:
-      - /relay/.AppData/zerotier:/var/lib/zerotier-one
-    cap_add:
-      - NET_ADMIN
-      - SYS_ADMIN
+#  zerotier:
+#    container_name: zerotier
+#    image: zyclonite/zerotier:latest
+#    devices:
+#      - /dev/net/run
+#    network_mode: host
+#    volumes:
+#      - /relay/.AppData/zerotier:/var/lib/zerotier-one
+#    cap_add:
+#      - NET_ADMIN
+#      - SYS_ADMIN
 
   wg-easy:
     environment:

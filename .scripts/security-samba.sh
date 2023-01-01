@@ -1,7 +1,5 @@
 #!/bin/bash
 
-mv /opt/relay/.scripts/jail.local /etc/fail2ban/jail.local
-
 # --- Setup samba share and config
 
 echo "#  ---  Create samba user password --- #"

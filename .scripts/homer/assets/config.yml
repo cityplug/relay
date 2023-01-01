@@ -9,7 +9,7 @@ target: "_blank" # optional html a tag target attribute
 stylesheet:
   - "assets/custom.css"
 
-columns: "4" # Change this to any number: (1, 2, 3, 4, 6, 12)
+columns: "3" # Change this to any number: (1, 2, 3, 4, 6, 12)
 colors:
   dark:
     highlight-primary: "#181C3A"
