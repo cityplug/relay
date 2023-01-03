@@ -1,6 +1,6 @@
 ---
 
-subtitle: "Pixle Management"
+subtitle: "Pluto Management"
 
 # This overwrites message config. Setting it to empty to remove message from this page and keep it only in the main one:
 message: ~
@@ -22,7 +22,7 @@ services:
   - name: "// Remote Services"
 #    icon: "fas fa-cloud"
     items:
-      - name: "Pixle.Pihole"
+      - name: "Pluto.Pihole"
         logo: "assets/tools/pihole.png"
         subtitle: "DNS"
         tag: "service"
